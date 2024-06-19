@@ -26,6 +26,8 @@ public class Consumer {
     private String location;
     /*头像*/
     private String avator;
+    /*是否vip*/
+    private Integer isVip;
     /*创建时间*/
     private Date createTime;
     /*更新时间*/
@@ -109,6 +111,14 @@ public class Consumer {
 
     public void setAvator(String avator) {
         this.avator = avator;
+    }
+
+    public Integer getIsVip() {
+        return isVip;
+    }
+
+    public void setIsVip(Integer isVip) {
+        this.isVip = isVip;
     }
 
     public Date getCreateTime() {

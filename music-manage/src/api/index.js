@@ -68,6 +68,8 @@ export const updateConsumer = (params) => post(`consumer/update`,params);
 export const delConsumer = (id) => get(`consumer/delete?id=${id}`);
 //根据用户id查询该用户的详细信息
 export const getUserOfId =(id) => get(`/consumer/selectByPrimaryKey?id=${id}`);
+//根据用户名查询该用户的详细信息
+export const getByUsername =(userName) => get(`/consumer/getByUsername?userName=${userName}`);
 
 
 //===============收藏===================
@@ -81,3 +83,12 @@ export const deleteCollection = (userId,songId) => get(`collect/delete?userId=${
 export const getCommentOfSongListId = (songListId) => get(`/comment/commentOfSongListId?songListId=${songListId}`);
 //删除评论
 export const deleteComment = (id) => get(`comment/delete?id=${id}`);
+
+//===============订单===================
+//查询所有订单
+export const getDetails = () => get(`/order/details`);
+//删除指定订单
+export const delOrderById = (id) => get(`/order/delete?id=${id}`)
+//创建订单
+export const createOrder = (params) => post(`/order/add`,params);
+

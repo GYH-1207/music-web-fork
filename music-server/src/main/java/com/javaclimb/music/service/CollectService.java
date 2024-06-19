@@ -37,5 +37,5 @@ public interface CollectService {
     /**
      * 查询某个用户是否已经收藏了某个歌曲
      */
-    public boolean existSongId(@Param("userId") Integer userId, @Param("songId") Integer songId);
+    public boolean existSongId(Integer userId, Integer songId);
 }

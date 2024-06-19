@@ -9,6 +9,7 @@ import Lyric from '@/pages/lyric'
 import SignUp from '@/pages/SignUp'
 import LoginIn from '@/pages/LoginIn'
 import Setting from '@/pages/Setting'
+import Vip from '@/pages/Vip';
 import SingerAlbum from '@/pages/SingerAlbum'
 import SongListAlbum from '@/pages/SongListAlbum'
 
@@ -61,6 +62,11 @@ export default new Router({
       path: '/setting',
       name: 'setting',
       component: Setting
+    },
+    {
+      path: '/vip',
+      name: 'vip',
+      component: Vip
     },
     {
       path: '/singer-album/:id',

@@ -5,10 +5,7 @@ import com.javaclimb.music.domain.Consumer;
 import com.javaclimb.music.service.ConsumerService;
 import com.javaclimb.music.utils.Consts;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -287,6 +284,14 @@ public class ConsumerController {
         jsonObject.put(Consts.CODE,0);
         jsonObject.put(Consts.MSG,"用户名或密码错误");
         return jsonObject;
+    }
+
+    /**
+     * 根据用户名查询用户id
+     */
+    @GetMapping("/getByUsername")
+    public Object getByUsername(String userName) {
+        return consumerService.getByUsername(userName);
     }
 }
 

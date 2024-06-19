@@ -1,5 +1,5 @@
 const song = {
-    state:{
+    state: {
         listOfSongs: [],     //当前浏览歌曲列表
         listPlayList: [],    //当前播放列表
         isPlay: false,          //是否播放中
@@ -7,7 +7,7 @@ const song = {
         id: '',                  //歌曲id
         playButtonUrl: '#icon-bofang',   //播放状态的图标
         duration: 0,                //音乐时长
-        curTime:  0,                //当前音乐的播放位置
+        curTime: 0,                //当前音乐的播放位置
         changeTime: 0,              //指定播放时刻
         title: '',                  //歌名
         artist: '',                 //歌手名
@@ -17,236 +17,249 @@ const song = {
         tempList: {},               //单个歌单信息或歌手信息
         listIndex: null,            //当前歌曲在歌单中的位置
         volume: 50,                 //音量
-        playModel:0,                    //0:列表循环1：单曲循环2:随机循环
+        playModel: 0,                    //0:列表循环1：单曲循环2:随机循环
         playModelSVG: '#953',
-        playSongListId:''
+        playSongListId: '',
+        isNeedVip: ''                //是否需要vip才能播放
     },
     getters: {
         listOfSongs: state => {
             let listOfSongs = state.listOfSongs;
-            if(!listOfSongs.length){
-                listOfSongs = JSON.parse(window.sessionStorage.getItem('listOfSongs')||null); 
+            if (!listOfSongs.length) {
+                listOfSongs = JSON.parse(window.sessionStorage.getItem('listOfSongs') || null);
             }
             return listOfSongs;
         },
         listPlayList: state => {
-          let listPlayList = state.listPlayList;
-          if(!listPlayList){
-            listPlayList = JSON.parse(window.sessionStorage.getItem('listPlayList')||null); 
-          }
-          return listPlayList;
-      },
+            let listPlayList = state.listPlayList;
+            if (!listPlayList) {
+                listPlayList = JSON.parse(window.sessionStorage.getItem('listPlayList') || null);
+            }
+            return listPlayList;
+        },
         isPlay: state => {
             let isPlay = state.isPlay;
-            if(!isPlay){
-                isPlay = JSON.parse(window.sessionStorage.getItem('isPlay')||null); 
+            if (!isPlay) {
+                isPlay = JSON.parse(window.sessionStorage.getItem('isPlay') || null);
             }
             return isPlay;
         },
         url: state => {
             let url = state.url;
-            if(!url){
-                url = JSON.parse(window.sessionStorage.getItem('url')||null); 
+            if (!url) {
+                url = JSON.parse(window.sessionStorage.getItem('url') || null);
             }
             return url;
         },
         id: state => {
             let id = state.id;
-            if(!id){
-                id = JSON.parse(window.sessionStorage.getItem('id')||null); 
+            if (!id) {
+                id = JSON.parse(window.sessionStorage.getItem('id') || null);
             }
             return id;
         },
         playButtonUrl: state => {
             let playButtonUrl = state.playButtonUrl;
-            if(!playButtonUrl){
-                playButtonUrl = JSON.parse(window.sessionStorage.getItem('playButtonUrl')||null); 
+            if (!playButtonUrl) {
+                playButtonUrl = JSON.parse(window.sessionStorage.getItem('playButtonUrl') || null);
             }
             return playButtonUrl;
         },
         duration: state => {
             let duration = state.duration;
-            if(!duration){
-                duration = JSON.parse(window.sessionStorage.getItem('duration')||null); 
+            if (!duration) {
+                duration = JSON.parse(window.sessionStorage.getItem('duration') || null);
             }
             return duration;
         },
         curTime: state => {
             let curTime = state.curTime;
-            if(!curTime){
-                curTime = JSON.parse(window.sessionStorage.getItem('curTime')||null); 
+            if (!curTime) {
+                curTime = JSON.parse(window.sessionStorage.getItem('curTime') || null);
             }
             return curTime;
         },
         changeTime: state => {
             let changeTime = state.changeTime;
-            if(!changeTime){
-                changeTime = JSON.parse(window.sessionStorage.getItem('changeTime')||null); 
+            if (!changeTime) {
+                changeTime = JSON.parse(window.sessionStorage.getItem('changeTime') || null);
             }
             return changeTime;
         },
         title: state => {
             let title = state.title;
-            if(!title){
-                title = JSON.parse(window.sessionStorage.getItem('title')||null); 
+            if (!title) {
+                title = JSON.parse(window.sessionStorage.getItem('title') || null);
             }
             return title;
         },
         artist: state => {
             let artist = state.artist;
-            if(!artist){
-                artist = JSON.parse(window.sessionStorage.getItem('artist')||null); 
+            if (!artist) {
+                artist = JSON.parse(window.sessionStorage.getItem('artist') || null);
             }
             return artist;
         },
         picUrl: state => {
             let picUrl = state.picUrl;
-            if(!picUrl){
-                picUrl = JSON.parse(window.sessionStorage.getItem('picUrl')||null); 
+            if (!picUrl) {
+                picUrl = JSON.parse(window.sessionStorage.getItem('picUrl') || null);
             }
             return picUrl;
         },
         autoNext: state => {
             let autoNext = state.autoNext;
-            if(!autoNext){
-                autoNext = JSON.parse(window.sessionStorage.getItem('autoNext')||null); 
+            if (!autoNext) {
+                autoNext = JSON.parse(window.sessionStorage.getItem('autoNext') || null);
             }
             return autoNext;
         },
         lyric: state => {
             let lyric = state.lyric;
-            if(!lyric){
-                lyric = JSON.parse(window.sessionStorage.getItem('lyric')||null); 
+            if (!lyric) {
+                lyric = JSON.parse(window.sessionStorage.getItem('lyric') || null);
             }
             return lyric;
         },
         tempList: state => {
             let tempList = state.tempList;
-            if(!tempList){
-                tempList = JSON.parse(window.sessionStorage.getItem('tempList')||null); 
+            if (!tempList) {
+                tempList = JSON.parse(window.sessionStorage.getItem('tempList') || null);
             }
             return tempList;
         },
         listIndex: state => {
             let listIndex = state.listIndex;
-            if(!listIndex){
-                listIndex = JSON.parse(window.sessionStorage.getItem('listIndex')||null); 
+            if (!listIndex) {
+                listIndex = JSON.parse(window.sessionStorage.getItem('listIndex') || null);
             }
             return listIndex;
         },
         volume: state => {
             let volume = state.volume;
-            if(!volume){
-                volume = JSON.parse(window.sessionStorage.getItem('volume')||null); 
+            if (!volume) {
+                volume = JSON.parse(window.sessionStorage.getItem('volume') || null);
             }
             return volume;
         },
         playModel: state => {
-          
-          let playModel = state.playModel;
-          if(!playModel){
-              playModel = JSON.parse(window.sessionStorage.getItem('playModel')||null); 
-          }
-          return playModel;
+
+            let playModel = state.playModel;
+            if (!playModel) {
+                playModel = JSON.parse(window.sessionStorage.getItem('playModel') || null);
+            }
+            return playModel;
         },
         playModelSVG: state => {
-        
-          let playModelSVG = state.playModelSVG;
-          if(!playModelSVG){
-              playModelSVG = JSON.parse(window.sessionStorage.getItem('playModelSVG')||null); 
-          }
-          return playModelSVG;
+
+            let playModelSVG = state.playModelSVG;
+            if (!playModelSVG) {
+                playModelSVG = JSON.parse(window.sessionStorage.getItem('playModelSVG') || null);
+            }
+            return playModelSVG;
         },
         playSongListId: state => {
-          
-          let playSongListId = state.playSongListId;
-          if(!playSongListId){
-            playSongListId = JSON.parse(window.localStorage.getItem('playSongListId')||null); 
-          }
-          return playSongListId;
+
+            let playSongListId = state.playSongListId;
+            if (!playSongListId) {
+                playSongListId = JSON.parse(window.localStorage.getItem('playSongListId') || null);
+            }
+            return playSongListId;
         },
-        
+        isNeedVip: state => {
+
+            let isNeedVip = state.isNeedVip;
+            if (!isNeedVip) {
+                isNeedVip = JSON.parse(window.localStorage.getItem('isNeedVip') || null);
+            }
+            return isNeedVip;
+        },
+
     },
     mutations: {
-        setListOfSongs: (state,listOfSongs) => {
+        setListOfSongs: (state, listOfSongs) => {
             state.listOfSongs = listOfSongs;
-            window.sessionStorage.setItem('listOfSongs',JSON.stringify(listOfSongs));
+            window.sessionStorage.setItem('listOfSongs', JSON.stringify(listOfSongs));
         },
-        setListPlayList: (state,listPlayList) => {
-          state.listPlayList = listPlayList;
-          window.sessionStorage.setItem('listPlayList',JSON.stringify(listPlayList));
+        setListPlayList: (state, listPlayList) => {
+            state.listPlayList = listPlayList;
+            window.sessionStorage.setItem('listPlayList', JSON.stringify(listPlayList));
         },
-        setIsPlay: (state,isPlay) => {
+        setIsPlay: (state, isPlay) => {
             state.isPlay = isPlay;
-            window.sessionStorage.setItem('isPlay',JSON.stringify(isPlay));
+            window.sessionStorage.setItem('isPlay', JSON.stringify(isPlay));
         },
-        setUrl: (state,url) => {
+        setUrl: (state, url) => {
             state.url = url;
-            window.sessionStorage.setItem('url',JSON.stringify(url));
+            window.sessionStorage.setItem('url', JSON.stringify(url));
         },
-        setId: (state,id) => {
+        setId: (state, id) => {
             state.id = id;
-            window.sessionStorage.setItem('id',JSON.stringify(id));
+            window.sessionStorage.setItem('id', JSON.stringify(id));
         },
-        setPlayButtonUrl: (state,playButtonUrl) => {
+        setPlayButtonUrl: (state, playButtonUrl) => {
             state.playButtonUrl = playButtonUrl;
-            window.sessionStorage.setItem('playButtonUrl',JSON.stringify(playButtonUrl));
+            window.sessionStorage.setItem('playButtonUrl', JSON.stringify(playButtonUrl));
         },
-        setDuration: (state,duration) => {
+        setDuration: (state, duration) => {
             state.duration = duration;
-            window.sessionStorage.setItem('duration',JSON.stringify(duration));
-        },        
-        setCurTime: (state,curTime) => {
+            window.sessionStorage.setItem('duration', JSON.stringify(duration));
+        },
+        setCurTime: (state, curTime) => {
             state.curTime = curTime;
-            window.sessionStorage.setItem('curTime',JSON.stringify(curTime));
+            window.sessionStorage.setItem('curTime', JSON.stringify(curTime));
         },
-        setChangeTime: (state,changeTime) => {
+        setChangeTime: (state, changeTime) => {
             state.changeTime = changeTime;
-            window.sessionStorage.setItem('changeTime',JSON.stringify(changeTime));
+            window.sessionStorage.setItem('changeTime', JSON.stringify(changeTime));
         },
-        setTitle: (state,title) => {
+        setTitle: (state, title) => {
             state.title = title;
-            window.sessionStorage.setItem('title',JSON.stringify(title));
+            window.sessionStorage.setItem('title', JSON.stringify(title));
         },
-        setArtist: (state,artist) => {
+        setArtist: (state, artist) => {
             state.artist = artist;
-            window.sessionStorage.setItem('artist',JSON.stringify(artist));
+            window.sessionStorage.setItem('artist', JSON.stringify(artist));
         },
-        setPicUrl: (state,picUrl) => {
+        setPicUrl: (state, picUrl) => {
             state.picUrl = picUrl;
-            window.sessionStorage.setItem('picUrl',JSON.stringify(picUrl));
+            window.sessionStorage.setItem('picUrl', JSON.stringify(picUrl));
         },
-        setAutoNext: (state,autoNext) => {
+        setAutoNext: (state, autoNext) => {
             state.autoNext = autoNext;
-            window.sessionStorage.setItem('autoNext',JSON.stringify(autoNext));
+            window.sessionStorage.setItem('autoNext', JSON.stringify(autoNext));
         },
-        setLyric: (state,lyric) => {
+        setLyric: (state, lyric) => {
             state.lyric = lyric;
-            window.sessionStorage.setItem('lyric',JSON.stringify(lyric));
+            window.sessionStorage.setItem('lyric', JSON.stringify(lyric));
         },
-        setTempList: (state,tempList) => {
+        setTempList: (state, tempList) => {
             state.tempList = tempList;
-            window.sessionStorage.setItem('tempList',JSON.stringify(tempList));
+            window.sessionStorage.setItem('tempList', JSON.stringify(tempList));
         },
-        setListIndex: (state,listIndex) => {
+        setListIndex: (state, listIndex) => {
             state.listIndex = listIndex;
-            window.sessionStorage.setItem('listIndex',JSON.stringify(listIndex));
+            window.sessionStorage.setItem('listIndex', JSON.stringify(listIndex));
         },
-        setVolume: (state,volume) => {
+        setVolume: (state, volume) => {
             state.volume = volume;
-            window.sessionStorage.setItem('volume',JSON.stringify(volume));
+            window.sessionStorage.setItem('volume', JSON.stringify(volume));
         },
-        setPlayModel: (state,playModel) => {
-          state.playModel = playModel;
-          window.sessionStorage.setItem('playModel',JSON.stringify(playModel));
+        setPlayModel: (state, playModel) => {
+            state.playModel = playModel;
+            window.sessionStorage.setItem('playModel', JSON.stringify(playModel));
         },
-        setPlayModelSVG: (state,playModelSVG) => {
-          state.playModelSVG = playModelSVG;
-          window.sessionStorage.setItem('playModelSVG',JSON.stringify(playModelSVG));
+        setPlayModelSVG: (state, playModelSVG) => {
+            state.playModelSVG = playModelSVG;
+            window.sessionStorage.setItem('playModelSVG', JSON.stringify(playModelSVG));
         },
-        setPlaySongListId: (state,playSongListId) => {
-          state.playSongListId = playSongListId;
-          window.localStorage.setItem('playSongListId',JSON.stringify(playSongListId));
+        setPlaySongListId: (state, playSongListId) => {
+            state.playSongListId = playSongListId;
+            window.localStorage.setItem('playSongListId', JSON.stringify(playSongListId));
+        },
+        setIsNeedVip: (state, isNeedVip) => {
+            state.isNeedVip = isNeedVip;
+            window.localStorage.setItem('isNeedVip', JSON.stringify(isNeedVip));
         },
     }
 }

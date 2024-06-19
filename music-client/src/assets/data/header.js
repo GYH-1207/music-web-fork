@@ -14,6 +14,7 @@ const loginMsg = [
 
 //用户下拉菜单
 const menuList = [
+    {name: 'VIP会员',path: '/vip'},
     {name: '设置',path: '/setting'},
     {name: '退出',path: 0}
 ]

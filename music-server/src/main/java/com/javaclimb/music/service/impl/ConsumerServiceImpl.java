@@ -3,9 +3,11 @@ package com.javaclimb.music.service.impl;
 import com.javaclimb.music.dao.ConsumerMapper;
 import com.javaclimb.music.domain.Consumer;
 import com.javaclimb.music.service.ConsumerService;
+import com.javaclimb.music.service.VipService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,6 +19,9 @@ public class ConsumerServiceImpl implements ConsumerService {
     @Autowired
     private ConsumerMapper consumerMapper;
 
+    @Autowired
+    private VipService vipService;
+
     /**
      * 增加
      *
@@ -24,7 +29,7 @@ public class ConsumerServiceImpl implements ConsumerService {
      */
     @Override
     public boolean insert(Consumer consumer) {
-        return consumerMapper.insert(consumer)>0;
+        return consumerMapper.insert(consumer) > 0;
     }
 
     /**
@@ -34,7 +39,7 @@ public class ConsumerServiceImpl implements ConsumerService {
      */
     @Override
     public boolean update(Consumer consumer) {
-        return consumerMapper.update(consumer)>0;
+        return consumerMapper.update(consumer) > 0;
     }
 
     /**
@@ -44,7 +49,7 @@ public class ConsumerServiceImpl implements ConsumerService {
      */
     @Override
     public boolean delete(Integer id) {
-        return consumerMapper.delete(id)>0;
+        return consumerMapper.delete(id) > 0;
     }
 
     /**
@@ -62,7 +67,18 @@ public class ConsumerServiceImpl implements ConsumerService {
      */
     @Override
     public List<Consumer> allConsumer() {
-        return consumerMapper.allConsumer();
+        List<Consumer> consumers = consumerMapper.allConsumer();
+        List<Consumer> result = new ArrayList<>();
+        for (Consumer consumer : consumers) {
+            int isVip = vipService.isVip(consumer.getId())?1:0;
+            consumer.setIsVip(isVip);
+            result.add(consumer);
+        }
+        for (Consumer consumer : result) {
+            //更改数据库
+            update(consumer);
+        }
+        return result;
     }
 
     /**
@@ -73,7 +89,7 @@ public class ConsumerServiceImpl implements ConsumerService {
      */
     @Override
     public boolean verifyPassword(String username, String password) {
-        return consumerMapper.verifyPassword(username,password)>0;
+        return consumerMapper.verifyPassword(username, password) > 0;
     }
 
     /**

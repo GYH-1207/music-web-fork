@@ -5,6 +5,8 @@ const configure = {
         showAside: false,               //是否显示播放中的歌曲列表
         loginIn: false,                 //用户是否已登录
         isActive: false,                //当前歌曲是否已收藏
+        activeOrder: false,             //当前选中的订单名
+        srcUrl: ''                      //头像路径
     },
     getters: {
         activeName: state => {
@@ -34,7 +36,21 @@ const configure = {
                 isActive = JSON.parse(window.sessionStorage.getItem('isActive')) 
             }
             return isActive
-        }        
+        },
+        activeOrder: state => {
+            let activeOrder = state.activeOrder
+            if(!activeOrder){
+                activeOrder = JSON.parse(window.sessionStorage.getItem('activeOrder')) 
+            }
+            return activeOrder
+        },      
+        srcUrl: state => {
+            let srcUrl = state.srcUrl
+            if(!srcUrl){
+                srcUrl = JSON.parse(window.sessionStorage.getItem('srcUrl')) 
+            }
+            return srcUrl
+        },
     },
     mutations: {
         setActiveName: (state,activeName) => {
@@ -52,7 +68,15 @@ const configure = {
         setIsActive: (state,isActive) => {
             state.isActive = isActive
             window.sessionStorage.setItem('isActive',JSON.stringify(isActive))
-        }
+        },
+        setActiveOrder: (state,activeOrder) => {
+            state.activeOrder = activeOrder
+            window.sessionStorage.setItem('activeOrder',JSON.stringify(activeOrder))
+        },
+        setSrcUrl: (state,setSrcUrl) => {
+            state.setSrcUrl = setSrcUrl
+            window.sessionStorage.setItem('setSrcUrl',JSON.stringify(setSrcUrl))
+        },
     }
 }
 

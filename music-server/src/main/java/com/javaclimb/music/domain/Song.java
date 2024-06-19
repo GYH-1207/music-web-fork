@@ -25,6 +25,14 @@ public class Song implements Serializable {
     private String lyric;
 //    路径
     private String url;
+//    是否vip歌曲
+    private Integer isVip;
+//    是否vip歌曲
+    private Integer userId;
+//    是否vip歌曲
+    private Integer songId;
+//    歌曲播放次数
+    private Integer songPlayCount;
 
     public Integer getId() {
         return id;
@@ -96,5 +104,37 @@ public class Song implements Serializable {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public Integer getIsVip() {
+        return isVip;
+    }
+
+    public void setIsVip(Integer isVip) {
+        this.isVip = isVip;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public Integer getSongId() {
+        return songId;
+    }
+
+    public void setSongId(Integer songId) {
+        this.songId = songId;
+    }
+
+    public Integer getSongPlayCount() {
+        return songPlayCount;
+    }
+
+    public void setSongPlayCount(Integer songPlayCount) {
+        this.songPlayCount = songPlayCount;
     }
 }

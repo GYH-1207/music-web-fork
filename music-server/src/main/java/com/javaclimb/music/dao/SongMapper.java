@@ -1,6 +1,7 @@
 package com.javaclimb.music.dao;
 
 import com.javaclimb.music.domain.Song;
+import io.lettuce.core.dynamic.annotation.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -11,12 +12,12 @@ import java.util.List;
 @Repository
 public interface SongMapper {
     /**
-     *增加
+     * 增加
      */
     public int insert(Song song);
 
     /**
-     *修改
+     * 修改
      */
     public int update(Song song);
 
@@ -24,6 +25,12 @@ public interface SongMapper {
      * 删除
      */
     public int delete(Integer id);
+
+    /**
+     * 根据主键查询整个对象(Client)
+     */
+//    public Song selectByPrimaryKeyClient(@Param("userId") Integer userId, @Param("id") Integer id);
+
 
     /**
      * 根据主键查询整个对象
@@ -46,9 +53,16 @@ public interface SongMapper {
     public List<Song> likeSongOfName(String name);
 
     /**
+     * 根据歌手id查询(Client)
+     */
+//    public List<Song> songOfSingerIdClient(@Param("userId") Integer userId, @Param("singerId") Integer singerId);
+
+    /**
      * 根据歌手id查询
      */
-    public List<Song> songOfSingerId(Integer songOfSingerId);
+    public List<Song> songOfSingerId(@Param("singerId") Integer singerId);
+
+    List<Song> test();
 }
 
 

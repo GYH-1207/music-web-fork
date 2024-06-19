@@ -14,12 +14,13 @@
         <result column="introduction" jdbcType="VARCHAR" property="introduction"/>
         <result column="location" jdbcType="VARCHAR" property="location"/>
         <result column="avator" jdbcType="VARCHAR" property="avator"/>
+        <result column="is_vip" jdbcType="INTEGER" property="isVip"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,username,password,sex,phone_num,email,birth,introduction,location,avator,create_time,update_time
+        id,username,password,sex,phone_num,email,birth,introduction,location,avator,is_vip,create_time,update_time
     </sql>
 
     <insert id="insert" parameterType="com.javaclimb.music.domain.Consumer">
@@ -55,7 +56,7 @@
             <if test="avator != null">
                 avator,
             </if>
-            create_time,update_time,
+            is_vip,create_time,update_time,
         </trim>
         <trim prefix=" values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -88,7 +89,7 @@
             <if test="avator != null">
                 #{avator},
             </if>
-            now(),now(),
+            0,now(),now(),
         </trim>        
     </insert>
     
@@ -121,6 +122,9 @@
             </if>
             <if test="avator != null">
                 avator = #{avator},
+            </if>
+            <if test="isVip != null">
+                is_vip = #{isVip},
             </if>
             update_time = now(),
         </set>
@@ -157,7 +161,6 @@
         from consumer
         where username = #{username}
     </select>
-
 </mapper>
 
 

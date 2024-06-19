@@ -34,29 +34,9 @@ export default {
         ])
     },
     mounted(){
-    //   setTimeout(function(){
-    //     let player = this.$refs.player;
-    //     player.pause();
-    //     this.$store.commit('setIsPlay',false);
-    //   },1000)
-    //   // let player = this.$refs.player;
-    //   // this.$store.commit('setDuration',player.duration);
-    //   // //开始播放
-    //   // player.pause();
         console.log("mounted==="+this.isPlay);
         this.$store.commit('setPlayModel',0);
-
         this.$store.commit('setPlayModelSVG','#953');
-
-      // this.aaa = this.url
-
-      // this.$store.commit('setXurl',this.url);
-      // this.$store.commit('setIsPlay',true);
-      // // this.$store.commit('setUrl','');
-      // console.log(this.aaa);
-      // console.log(this.Xurl);
-      // console.log(this.isPlay);
-      // console.log(this.url);
     },
     watch:{
         //监听播放还是暂停
@@ -82,7 +62,6 @@ export default {
             player.play();
             this.$store.commit('setIsPlay',true);
             console.log(this.isPlay);
-
         },
         //播放完成之后触发
         ended(){

@@ -48,6 +48,11 @@ export default {
           index: 'SongList',
           title: '歌单管理'
         },
+        {
+          icon: 'el-icon-document',
+          index: 'VipOrder',
+          title: 'VIP管理'
+        }
       ]
     }
   },

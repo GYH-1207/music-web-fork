@@ -34,7 +34,13 @@
         </template>
       </el-table-column>
       <el-table-column prop="introduction" label="签名" align="center"></el-table-column>
-      <el-table-column prop="location" label="地区" width="100" align="center"></el-table-column> 
+      <el-table-column prop="location" label="地区" width="100" align="center"></el-table-column>
+      <el-table-column label="VIP" size="mini" width="110" align="center">
+        <template slot-scope="scope">
+            <el-tag  v-if="scope.row.isVip==1" style="color: red;font-weight: bolder;">{{ '尊贵VIP用户' }}</el-tag>
+            <el-tag type="danger" v-if="scope.row.isVip==0" style="color: gray;font-weight: bolder;">{{ '未开通VIP' }}</el-tag>
+        </template>
+      </el-table-column>   
       <el-table-column label="收藏" width="80" align="center">
         <template slot-scope="scope">
           <el-button size="mini" @click="getCollect(data[scope.$index].id)">收藏</el-button>
@@ -85,7 +91,7 @@
         </el-form-item>      
         <el-form-item prop="location" label="地区" size="mini">
             <el-input v-model="registerForm.location" placeholder="地区"></el-input>
-        </el-form-item>          
+        </el-form-item>    
       </el-form>
         <span slot="footer">
             <el-button size="mini" @click="centerDialogVisible = false">取消</el-button>

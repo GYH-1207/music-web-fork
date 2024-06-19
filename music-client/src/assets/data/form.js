@@ -1,10 +1,10 @@
 // 匹配规则
 const rules = {
   username: [
-    { required: true, trigger: 'blur' }
+    { required: true, message: '请输入用户名', trigger: 'blur' }
   ],
   password: [
-    { required: true, trigger: 'blur' }
+    { required: true, message: '请输入密码', trigger: 'blur' }
   ],
   sex: [
     { required: true, message: '请选择性别', trigger: 'change' }

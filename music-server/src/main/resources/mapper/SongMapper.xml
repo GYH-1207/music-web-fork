@@ -13,19 +13,42 @@
         <result column="pic" jdbcType="VARCHAR" property="pic"/>
         <result column="url" jdbcType="VARCHAR" property="url"/>
         <result column="url" jdbcType="VARCHAR" property="url"/>
-
+        <result column="is_vip" jdbcType="INTEGER" property="isVip"/>
     </resultMap>
 
     <resultMap id="ResultMapWithBLOBs" type="com.javaclimb.music.domain.Song" extends="BaseResultMap">
         <result column="lyric" jdbcType="LONGVARCHAR" property="lyric"/>
     </resultMap>
 
+<!--    <resultMap id="ResultMapWithSpecial" type="com.javaclimb.music.domain.Song" extends="ResultMapWithBLOBs">-->
+<!--        <result column="user_id" javaType="INTEGER" property="userId"/>-->
+<!--        <result column="song_id" javaType="INTEGER" property="songId"/>-->
+<!--        <result column="song_play_count" javaType="INTEGER" property="songPlayCount"/>-->
+<!--    </resultMap>-->
+
+    <resultMap id="ResultMapWithSpecial" type="com.javaclimb.music.domain.Song" extends="BaseResultMap">
+        <!-- 其他字段映射配置 -->
+        <result column="user_id" javaType="Integer" property="userId"/>
+        <result column="song_id" javaType="Integer" property="songId"/>
+        <result column="song_play_count" javaType="Integer" property="songPlayCount"/>
+    </resultMap>
+
     <sql id="Base_Column_List">
-        id,singer_id,name,introduction,create_time,update_time,pic,url
+        id,singer_id,name,introduction,create_time,update_time,pic,url,is_vip
     </sql>
 
     <sql id="Blob_Column_List">
-        id,singer_id,name,introduction,create_time,update_time,pic,lyric,url
+        id,singer_id,name,introduction,create_time,update_time,pic,lyric,url,is_vip
+    </sql>
+
+<!--    <sql id="Special_Column_List">-->
+<!--        s.id,s.singer_id,s.name,s.introduction,s.create_time,s.update_time,s.pic,s.lyric,s.url,s.is_vip,-->
+<!--            sps.user_id,sps.song_id,sps.song_play_count-->
+<!--    </sql>-->
+
+    <sql id="Special_Column_List">
+        s.id, s.singer_id, s.name, s.introduction, s.create_time, s.update_time, s.pic, s.lyric, s.url, s.is_vip,
+    sps.user_id AS user_id, sps.song_id AS song_id, sps.song_play_count AS song_play_count
     </sql>
 
     <insert id="insert" parameterType="com.javaclimb.music.domain.Song">
@@ -53,6 +76,9 @@
             <if test="url != null">
                 url,
             </if>
+            <if test="isVip != null">
+                is_vip,
+            </if>
         </trim>
         <trim prefix=" values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -76,6 +102,9 @@
             </if>
             <if test="url != null">
                 #{url},
+            </if>
+            <if test="isVip != null">
+                #{isVip},
             </if>
         </trim>
     </insert>
@@ -102,6 +131,9 @@
             <if test="url != null">
                 url = #{url},
             </if>
+            <if test="isVip != null">
+                is_vip = #{isVip},
+            </if>
         </set>
         where id = #{id}
     </update>
@@ -114,11 +146,24 @@
 --         ALTER TABLE song AUTO_INCREMENT = 1;
     </delete>
 
+<!--    <select id="selectByPrimaryKeyClient" resultMap="ResultMapWithSpecial" parameterType="java.lang.Integer">-->
+<!--        select-->
+<!--        <include refid="Special_Column_List"/>-->
+<!--        FROM song s LEFT JOIN song_play_sum sps ON s.id = sps.song_id-->
+<!--        where-->
+<!--        (-->
+<!--        sps.user_id = #{userId}-->
+<!--            or-->
+<!--        sps.user_id is null-->
+<!--        )-->
+<!--        and s.id = #{id}-->
+<!--    </select>-->
+
     <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
         select
         <include refid="Blob_Column_List"/>
-        from song
-        where id=#{id}
+        FROM song s
+        where id = #{id}
     </select>
 
     <select id="allSong" resultMap="ResultMapWithBLOBs">
@@ -141,27 +186,33 @@
         where name like #{name}
     </select>
 
+<!--    <select id="songOfSingerIdClient" resultMap="ResultMapWithSpecial" parameterType="java.lang.Integer">-->
+<!--        select-->
+<!--        <include refid="Special_Column_List"/>-->
+<!--        FROM song s LEFT JOIN song_play_sum sps ON s.id = sps.song_id-->
+<!--        where-->
+<!--        (-->
+<!--        sps.user_id = #{userId}-->
+<!--            or-->
+<!--        sps.user_id is null-->
+<!--        )-->
+<!--        and s.singer_id = #{singerId}-->
+<!--    </select>-->
+
     <select id="songOfSingerId" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
         select
         <include refid="Blob_Column_List"/>
-        from song
+        FROM song
         where singer_id = #{singerId}
     </select>
 
+    <select id="test" resultMap="ResultMapWithSpecial">
+        select
+        <include refid="Special_Column_List"/>
+        FROM song s LEFT JOIN song_play_sum sps ON s.id = sps.song_id
+        LIMIT 10 OFFSET 0;
+    </select>
 </mapper>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
