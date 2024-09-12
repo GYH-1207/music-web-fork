@@ -20,7 +20,8 @@ const song = {
         playModel: 0,                    //0:列表循环1：单曲循环2:随机循环
         playModelSVG: '#953',
         playSongListId: '',
-        isNeedVip: ''                //是否需要vip才能播放
+        isNeedVip: '',                //是否需要vip才能播放
+        needAddPlayCount: false       //是否需要通知AlbumContent.vue更新songList结果集的播放次数一项
     },
     getters: {
         listOfSongs: state => {
@@ -174,7 +175,14 @@ const song = {
             }
             return isNeedVip;
         },
+        needAddPlayCount: state => {
 
+            let needAddPlayCount = state.needAddPlayCount;
+            if (!needAddPlayCount) {
+                needAddPlayCount = JSON.parse(window.localStorage.getItem('needAddPlayCount') || null);
+            }
+            return needAddPlayCount;
+        },
     },
     mutations: {
         setListOfSongs: (state, listOfSongs) => {
@@ -260,6 +268,10 @@ const song = {
         setIsNeedVip: (state, isNeedVip) => {
             state.isNeedVip = isNeedVip;
             window.localStorage.setItem('isNeedVip', JSON.stringify(isNeedVip));
+        },
+        setNeedAddPlayCount: (state, needAddPlayCount) => {
+            state.needAddPlayCount = needAddPlayCount;
+            window.localStorage.setItem('needAddPlayCount', JSON.stringify(needAddPlayCount));
         },
     }
 }

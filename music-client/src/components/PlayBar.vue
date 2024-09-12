@@ -107,6 +107,9 @@
         </div>
       </div>
     </div>
+    <div v-if="false">
+      <album-content :songList="listOfSongs" />
+    </div>
   </div>
 </template>
 <script>
@@ -121,7 +124,7 @@ import {
   addPlayCount,
   isSongadd,
   setSongPlayCount,
-  addSongPlayCount
+  addSongPlayCount,
 } from "../api/index";
 
 export default {
@@ -352,7 +355,11 @@ export default {
           console.log("index" + index);
           this.$store.commit("setListIndex", index);
         }
-        this.toplay(this.listPlayList[this.listIndex].url,this.listPlayList[this.listIndex].isVip,this.listPlayList[this.listIndex].id);
+        this.toplay(
+          this.listPlayList[this.listIndex].url,
+          this.listPlayList[this.listIndex].isVip,
+          this.listPlayList[this.listIndex].id
+        );
       }
     },
     //下一首
@@ -392,6 +399,7 @@ export default {
         this.notify("该歌曲需要开通VIP,才能播放", "warning");
         return;
       }
+      // 检查当前点击的歌曲是否正在播放
       let songListId = this.$route.params.id;
       if (this.userId) {
         isadd(this.userId, songListId).then((res) => {
@@ -444,6 +452,7 @@ export default {
             });
           }
         });
+        this.addPlaySumCount(id); // 给正在播放的歌曲播放量+1
       }
       if (url && url != this.url) {
         this.$store.commit("setId", this.listPlayList[this.listIndex].id);
@@ -585,15 +594,19 @@ export default {
         this.notify("请先登录", "warning");
       }
     },
+    addPlaySumCount(id) {
+      const res = [];
+      for (let i = 0; i < this.listOfSongs.length; i++) {
+        if (this.listOfSongs[i].id == id) {
+          this.listOfSongs[i].songPlayCount += 1;
+        }
+        res[i] = this.listOfSongs[i];
+      }
+      this.$store.commit("setListOfSongs", res);
+    },
   },
 };
 </script>
 <style  lang="scss" scoped>
 @import "../assets/css/play-bar.scss";
-// .play-bar{
-//   z-index: 2269;
-// }
-// :focus-visible {
-//     outline: burlywood auto 1px;
-// }
 </style>

@@ -1,10 +1,10 @@
 package com.javaclimb.music.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.javaclimb.music.dto.VipValidDto;
 import com.javaclimb.music.service.VipService;
 import com.javaclimb.music.utils.Consts;
 import com.javaclimb.music.utils.RedisPrefixUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,7 +33,7 @@ public class VipController {
         //vip信息
         String validUntilData = stringRedisTemplate.opsForValue().get(validUntilKey);
 
-        if (validUntilData == null) {
+        if (StringUtils.isEmpty(validUntilData)) {
             jsonObject.put(Consts.CODE, 0);
             jsonObject.put(Consts.MSG, "vip已过期");
             return jsonObject;

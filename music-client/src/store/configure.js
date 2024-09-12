@@ -6,7 +6,8 @@ const configure = {
         loginIn: false,                 //用户是否已登录
         isActive: false,                //当前歌曲是否已收藏
         activeOrder: false,             //当前选中的订单名
-        srcUrl: ''                      //头像路径
+        srcUrl: '',                      //头像路径
+        isVIf: false                    //是否展示v-if属性
     },
     getters: {
         activeName: state => {
@@ -51,6 +52,13 @@ const configure = {
             }
             return srcUrl
         },
+        isVIf: state => {
+            let isVIf = state.isVIf
+            if(!isVIf){
+                isVIf = JSON.parse(window.sessionStorage.getItem('isVIf')) 
+            }
+            return isVIf
+        },
     },
     mutations: {
         setActiveName: (state,activeName) => {
@@ -76,6 +84,10 @@ const configure = {
         setSrcUrl: (state,setSrcUrl) => {
             state.setSrcUrl = setSrcUrl
             window.sessionStorage.setItem('setSrcUrl',JSON.stringify(setSrcUrl))
+        },
+        setVIf: (state,setVIf) => {
+            state.setVIf = setVIf
+            window.sessionStorage.setItem('setSrcUrl',JSON.stringify(setVIf))
         },
     }
 }

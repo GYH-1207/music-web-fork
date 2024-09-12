@@ -270,7 +270,7 @@ public class SongController {
         String userId = request.getParameter("userId");
         String songId = request.getParameter("songId");
 
-        if(StringUtils.isEmpty(userId) || userId.equals("null")) {
+        if(StringUtils.isEmpty(userId) || userId.equals("null") || userId.equals("undefined")) {
             return  songService.selectByPrimaryKey(Integer.parseInt(songId));
         }
         return songService.selectByPrimaryKeyClient(Integer.parseInt(userId), Integer.parseInt(songId));

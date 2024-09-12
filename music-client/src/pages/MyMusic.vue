@@ -84,7 +84,7 @@ export default {
                         this.collection = res;
                         //通过歌曲id获取歌曲信息   
                         for(let item of this.collection){
-                            this.getSongsOfIds(item.songId);
+                            this.getSongsOfIds(userId,item.songId);
                         }             
                     })
                 .catch(err => {
@@ -92,8 +92,8 @@ export default {
                 })
         },
         //通过歌曲id获取歌曲信息   
-        getSongsOfIds(id){
-            songOfSongId(id)
+        getSongsOfIds(userId,id){
+            songOfSongId(userId,id)
                 .then(res =>{
                         this.collectList.push(res);
                     })

@@ -33,6 +33,8 @@ public class Song implements Serializable {
     private Integer songId;
 //    歌曲播放次数
     private Integer songPlayCount;
+//    歌曲是否正在播放
+    private Integer isActive = 0; //0未激活 1正在播放
 
     public Integer getId() {
         return id;
@@ -136,5 +138,13 @@ public class Song implements Serializable {
 
     public void setSongPlayCount(Integer songPlayCount) {
         this.songPlayCount = songPlayCount;
+    }
+
+    public Integer getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(Integer isActive) {
+        this.isActive = isActive;
     }
 }
